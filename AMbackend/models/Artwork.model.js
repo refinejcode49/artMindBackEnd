@@ -12,10 +12,10 @@ const artworkSchema = new Schema({
   },
   imageUrl: {
     type: String,
-    required: true,
+    //required: true,
   },
   year: {
-    type: Number,
+    type: String,
     required: true,
   },
   description: {
@@ -26,7 +26,7 @@ const artworkSchema = new Schema({
   owner: {
     type: Schema.Types.ObjectId, // the _id in the DB
     ref: "User",
-    required: true,
+    //required: true,
   },
   createdAt: {
     type: Date,
