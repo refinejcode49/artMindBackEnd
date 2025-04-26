@@ -29,6 +29,24 @@ router.get("/all", async (req, res) => {
     });
 });
 
+//to get a daily random artwork
+router.get("/daily", async (req, res) => {
+  const allArtworks = await ArtworkModel.find()
+    .then((allArtworks) => {
+      if (allArtworks.length === 0) {
+        return res.status(404).json({ message: "No artworks found" });
+      }
+      //to choose a random artwork
+      const randomIndex = Math.floor(Math.random() * allArtworks.length);
+      const randomArtwork = allArtworks[randomIndex];
+      res.status(200).json(randomArtwork);
+    })
+    .catch((error) => {
+      console.error("Error fetching daily artwork:", error);
+      res.status(500).json({ errorMessage: "Error fetching daily artwork" });
+    });
+});
+
 //to get one by id
 router.get("/:artworkId", async (req, res) => {
   const { artworkId } = req.params;
