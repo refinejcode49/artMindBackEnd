@@ -13,6 +13,9 @@ const favoriteArtworkSchema = new Schema(
       ref: "Artwork",
       required: true,
     },
+    comment: {
+      type: "String",
+    },
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`

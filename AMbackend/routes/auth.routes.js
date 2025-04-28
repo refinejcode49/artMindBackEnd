@@ -57,6 +57,29 @@ router.post("/login", async (req, res) => {
   }
 });
 
+// to update user info
+router.patch("/edit-account", isAuthenticated, async (req, res) => {
+  try {
+    const userId = req.payload._id;
+    const { username, profileImage } = req.body;
+
+    const updateFields = {};
+
+    if (username) updateFields.username = username;
+    if (profileImage) updateFields.profileImage = profileImage;
+    const updatedUser = await UserModel.findByIdAndUpdate(
+      userId,
+      { $set: updateFields },
+      { new: true }
+    );
+
+    res.json(updatedUser);
+  } catch (error) {
+    console.log("Error updating the user: ", error);
+    res.status(500).json({ errorMessage: "Error updating user" });
+  }
+});
+
 //check if the token is present and valid
 router.get("/verify", isAuthenticated, async (req, res) => {
   console.log("here is the verify route");

@@ -16,7 +16,7 @@ const artworkSchema = new Schema({
   },
   year: {
     type: String,
-    required: true,
+    //required: true,
   },
   description: {
     type: String,

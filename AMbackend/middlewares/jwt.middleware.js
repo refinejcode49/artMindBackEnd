@@ -18,7 +18,8 @@ function isAuthenticated(req, res, next) {
       res.status(400).json({ errorMessage: "Token not in headers" });
     }
   } catch (error) {
-    res.status(500).json({ errorMessage: "Token invalid" });
+    console.error("JWT verification failed:", error);
+    res.status(401).json({ errorMessage: "Token invalid" });
   }
 }
 
