@@ -1,4 +1,4 @@
-const ArtworkModel = require("../models/ArtWork.model");
+const ArtworkModel = require("../models/Artwork.model");
 
 const router = require("express").Router();
 
