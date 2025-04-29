@@ -10,7 +10,7 @@ const favoriteArtworkSchema = new Schema(
     },
     artwork: {
       type: Schema.Types.ObjectId,
-      ref: "Artwork",
+      ref: "artwork",
       required: true,
     },
     comment: {

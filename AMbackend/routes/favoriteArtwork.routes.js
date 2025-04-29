@@ -1,12 +1,12 @@
 const FavoriteArtworkModel = require("../models/FavoriteArtwork.model");
 
 const router = require("express").Router();
-//const { isAuthenticated } = require("../middlewares/jwt.middleware");
+const { isAuthenticated } = require("../middlewares/jwt.middleware");
 
 // to add a favorite artwork from one user
-router.post("/favorite", (req, res) => {
+router.post("/favorite", isAuthenticated, (req, res) => {
   const { artworkId } = req.body;
-  const userId = req._id;
+  const userId = req.user._id;
 
   FavoriteArtworkModel.create({ user: userId, artwork: artworkId })
     .then((favorite) => {

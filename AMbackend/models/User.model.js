@@ -25,6 +25,13 @@ const userSchema = new Schema(
       default:
         "https://cdn.pixabay.com/photo/2017/02/25/22/04/user-icon-2098873_1280.png",
     },
+    notes: [
+      {
+        artworkId: { type: Schema.Types.ObjectId, ref: "artwork" },
+        content: String,
+        createdAt: { type: Date, default: Date.now },
+      },
+    ],
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`

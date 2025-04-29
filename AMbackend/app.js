@@ -27,6 +27,9 @@ app.use("/artwork", artworkRoutes);
 const favoritesArtworkRoutes = require("./routes/favoriteArtwork.routes");
 app.use("/fav", favoritesArtworkRoutes);
 
+const notesRoutes = require("./routes/notes.routes");
+app.use("/user", notesRoutes);
+
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 
