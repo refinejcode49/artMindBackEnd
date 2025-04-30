@@ -6,7 +6,14 @@ const { isAuthenticated } = require("../middlewares/jwt.middleware");
 // to add a favorite artwork from one user
 router.post("/favorite", isAuthenticated, (req, res) => {
   const { artworkId } = req.body;
-  const userId = req.user._id;
+  const userId = req.payload._id;
+
+  console.log("artworkId:", artworkId);
+  console.log("userId:", userId);
+
+  if (!userId || !artworkId) {
+    return res.status(400).json({ message: "Missing user or artworkId" });
+  }
 
   FavoriteArtworkModel.create({ user: userId, artwork: artworkId })
     .then((favorite) => {
@@ -20,8 +27,8 @@ router.post("/favorite", isAuthenticated, (req, res) => {
 });
 
 // to get all the favorites artwork from one user
-router.get("/favorite", (req, res) => {
-  const userId = req._id;
+router.get("/favorite", isAuthenticated, (req, res) => {
+  const userId = req.payload._id;
 
   FavoriteArtworkModel.find({ user: userId })
     .then((favorites) => {
@@ -34,8 +41,8 @@ router.get("/favorite", (req, res) => {
 });
 
 // to delete one favorite artwork
-router.delete("/:artworkId", (req, res) => {
-  const userId = req._id;
+router.delete("/:artworkId", isAuthenticated, (req, res) => {
+  const userId = req.payload._id;
   const { artworkId } = req.params;
 
   FavoriteArtworkModel.findOneAndDelete({ user: userId, artwork: artworkId })
