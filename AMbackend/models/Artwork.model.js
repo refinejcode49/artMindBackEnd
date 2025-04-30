@@ -12,22 +12,17 @@ const artworkSchema = new Schema({
   },
   imageUrl: {
     type: String,
-    //required: true,
+    required: true,
   },
   year: {
     type: String,
-    //required: true,
+    required: true,
   },
   description: {
     type: String,
   },
   tags: [String],
-  //here we link the artWork to the user that created it if he did
-  owner: {
-    type: Schema.Types.ObjectId, // the _id in the DB
-    ref: "User",
-    //required: true,
-  },
+
   createdAt: {
     type: Date,
     default: Date.now,
