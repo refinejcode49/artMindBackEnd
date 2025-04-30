@@ -18,7 +18,6 @@ router.post("/create", async (req, res) => {
 //to get all the artwork
 router.get("/all", async (req, res) => {
   ArtworkModel.find()
-    .populate("owner")
     .then((responseFromDB) => {
       console.log("here are all the artwork!", responseFromDB);
       res.status(200).json(responseFromDB);
@@ -30,7 +29,7 @@ router.get("/all", async (req, res) => {
 });
 
 //to get a daily random artwork
-router.get("/daily", async (req, res) => {
+router.get("/daily-artwork", async (req, res) => {
   const allArtworks = await ArtworkModel.find()
     .then((allArtworks) => {
       if (allArtworks.length === 0) {
